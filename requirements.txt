@@ -2,3 +2,4 @@ Django==2.0
 django-ckeditor==5.4.0
 django-crispy-forms==1.7.2
 django-taggit
+Pillow
