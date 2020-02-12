@@ -1,0 +1,11 @@
+{% block comment %}
+
+{% load crispy_forms_tags %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Adicionar Comentário" onclick="document.getElementById('alert').style.display='block'"/>
+</form>
+
+{% endblock comment %}

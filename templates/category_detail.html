@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+<style>
+    .category {
+      margin: 20px 0px 20px 20px;
+    }
+</style>
+
+{% block content %}
+    <div class="container text-white">
+        {% for c in category_detail %}
+        <h1>Categoria: {{ c.title }}</h1>
+        {% endfor %}
+        <div class="row">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8 mt-3 left">
+                {% for post in posts %}
+                <div class="card text-dark mb-4" style="background-color: #ffdc9a;">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text text-muted h6">{{ post.author }} | {{post.category}} | {{ post.created_on}} </p>
+                        {% autoescape off %}
+                        <p class="card-text">{{post.content|truncatechars:50 }}</p>
+                        {% endautoescape %}
+                        <!--<a href="{% url 'post_detail' post.slug %}">Comments: {{ post.approved_comments.count }}</a>--><br>
+                        <a href="{% url 'post_detail' post.slug  %}" class="btn btn-lg btn-block text-white" style="background-color: #f0b169;">Ler mais &rarr;</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+        </div>
+    </div>
+{% endblock %}

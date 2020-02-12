@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tiemi's Archives</title>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Mansalva|Comfortaa|Assistant&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <meta name="google" content="notranslate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous" />
+    </head>
+
+    <body>
+        <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: rgb(255, 224, 167);
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #f00000;
+            border-color: #dc281e;
+        }
+        .masthead {
+            background: #3398E1;
+            height: auto;
+            padding-bottom: 15px;
+            padding-top: 10px;
+        }
+        #mainTitle {
+            font-family: 'Mansalva', cursive;
+        }
+    </style>
+
+    <!-- Navigation -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark shadow" style="background-color: #ceac6c;"">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}" id="mainTitle">Tiemi's Archives</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <!--<li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li> -->
+                    {% for c in categories %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category_detail' c.slug  %}">{{ c.title }}</a>
+                    </li>
+                    {% endfor %}
+                    <!--<li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>-->
+                </ul>
+                <!--<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>-->
+                
+            </div>
+            
+        </div>
+    </nav>
+        
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+        
+    <!-- Footer -->
+    <footer class="py-3 bg-grey" style="background-color: #ceac6c;">
+        <p class="m-0 text-dark text-center ">Copyright &copy; tiemi e nothing else</p>
+    </footer>
+    </body>
+</html>

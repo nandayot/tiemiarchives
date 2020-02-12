@@ -1,0 +1,100 @@
+{% extends 'base.html' %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    h1 {
+        color: #FFF;
+        font-family: 'Ruda', sans-serif;
+        font-size: 70px;
+        font-weight: 900;
+        margin: 0;
+        padding-top: 70px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    h4 {
+        color: #FFF;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        font-weight: 900;
+        margin: 0;
+        padding-top: 0 auto;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .jumbotron {
+        background-image: url("https://66.media.tumblr.com/d0bc7b1a423c9535947f2b30d7afe250/tumblr_pe80sgoJIg1xc438co6_1280.png");
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;   
+    }
+    
+    .text-light{
+        font-family: Assistant;
+    }
+    .card-columns{
+        display: inline-block;
+    }
+
+</style>
+
+<!--<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Bem vindos ao site da tiemi! </h3>
+                    <p class="text-light">Um site feito especialmente para guardar as produções e esquisitices dela.  &nbsp
+                    <br>Aproveitem caso achem algo interessante.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>-->
+<div class="jumbotron">
+    <h1>Oi, é a tiemi!</h1>
+    <h4>Um site feito especialmente para guardar as produções e esquisitices dela.
+        <br>Aproveitem caso achem algo interessante.
+    </h4>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column --> 
+        <div class="col-md-8 mt-3 left">
+            {% for post in posts %}
+            <div class="jumbotron-fluid">
+                <div class="card text-dark mb-4" style="background-color: #ffdc9a;">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text text-muted h6">{{ post.author }} | {{post.category}} | {{ post.created_on}} </p>
+                        {% autoescape off %}
+                        <p class="card-text">{{post.content|truncatechars:50 }}</p>
+                        {% endautoescape %}
+                        <!--<a href="{% url 'post_detail' post.slug %}">Comments: {{ post.approved_comments.count }}</a>--><br>
+                        <a href="{% url 'post_detail' post.slug  %}" class="btn btn-lg btn-block text-white" style="background-color: #f0b169;">Ler mais &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}</div> 
+        
+    </div>
+
+        
+    
+</div>
+{%endblock%}

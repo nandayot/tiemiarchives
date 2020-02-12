@@ -1,0 +1,25 @@
+{% block sidebar %}
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4 float-right ">
+            <div class="card text-dark my-4" style="background-color: #ffdc9a;">
+                <h5 class="card-header">Tags</h5>
+                {% for post in posts %}
+                <div class="card-body">
+                    {% for tag in post.tags.all %}
+                    <a href="#" class="mr-1 badge badge-dark">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="card text-dark my-4" style="background-color: #ffdc9a;">
+                <h5 class="card-header">Categorias</h5>
+                {% for c in categories %}
+                <div class="card-body">
+                    <a href="#" class="mr-1 badge badge-dark">{{ c.title }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+{% endblock sidebar %}

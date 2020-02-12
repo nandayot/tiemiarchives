@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<style>
+.comment {
+  margin: 20px 0px 20px 20px;
+  border-left: 10px solid #ceac6c;
+  background-color: none;
+}
+</style>
+<div class="alert alert-success" id="alert" role="alert" style = "display: none" >
+  Comentário enviado para aprovação!
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4 text-dark mt-3 left top" style="background-color: #ffdc9a;">
+      <div class="card-body">
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>  
+        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+        <div style="display:flex">
+          {% for tag in post.tags.all %}
+          <a href="#" class="mr-1 badge badge-dark">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+        <p class="card-text ">{{ post.content | safe }}</p>
+      </div>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    <div class="col-md-8 card mb-4 text-dark mt-3 left  top" style="background-color: #ffdc9a;">
+      <div class="card-body">
+        <h2>Comentários</h2>
+        <a class="btn btn-default" href="#" onclick="document.getElementById('comentario').style.display='block'">Adicionar Comentário</a>
+        <div class="container" id="comentario" style = "display: none">
+          <h4>Novo comentario</h4>
+          {% block comment %} {% include 'comment.html' %} {% endblock comment %}</div> 
+        </div>
+        {% for comment in post.comments.all %}
+
+          {% if comment.active %}
+          <div class="comment">
+              <!--<div class="date">
+                  {{ comment.created_on }}
+                  {% if not comment.approved_comment %}
+                      <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                      <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                  {% endif %}
+              </div>
+              <strong>{{ comment.name }}</strong>
+              <p>{{ comment.body|linebreaks }}</p>-->
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ comment.name }}</h5>
+                  <p class="card-text">{{ comment.body|linebreaks }}</p>
+                  <p class="card-text"><small class="text-muted">{{ comment.created_on }}</small></p>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+{% endblock content %}
