@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from blog import *
-import django_heroku
-django_heroku.settings(locals())
 
 DJANGO_SETTINGS_MODULE='correctly_settings'
 
